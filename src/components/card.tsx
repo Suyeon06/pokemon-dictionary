@@ -22,11 +22,14 @@ export default function PokeCard({ name }: { name: string }) {
   //console(개발자도구F12)에 해당 정보를 출력(개발자가 데이터를 확인하기 위해)
 
   return (
-    <div className="border w-[100px] h-[140px] m-[8px] p-[4px]">
-      <div className="w-[100px] h-[100px]">
-        <img src={pokemon.sprites.front_default} alt={name} />
+    <div className="border border-gray-400 w-[150px] h-[200px] m-[8px] p-[4px] rounded-[10px]">
+      <div className="divide-y divide-gray-400">
+        <h3 className="text-center">{name}</h3>
+        <div>
+          <img src={pokemon.sprites.front_default} alt={name} className="w-full h-full object-contain"/>
+        </div>
       </div>
-      <h3>{name}</h3>
+      <div className="flex flex-col rounded-b-[10px]">type</div>
     </div>
   );
   //return.. 화면에 표시할 부분
