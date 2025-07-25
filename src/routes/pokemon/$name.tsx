@@ -13,9 +13,12 @@ export default function PokemonDetail() {
   if (isError) return <div>Error loading data</div>;
 
   return (
-    <div>
-      <h2>{pokemon.name}</h2>
-      <img src={pokemon.sprites.front_default} alt={pokemon.name} />
+    <div className="flex h-[400px] p-2 w-full border-2 border-gray-400 rounded-[10px] items-center justify-evenly">
+      <img src={pokemon.sprites.front_default} alt={pokemon.name} className="h-full"/>
+      <div className="flex flex-col space-y-2">
+        <div className="text-4xl font-bold">{pokemon.name}</div>
+        <div className="w-[570px] h-[300px] border-2 border-gray-400 rounded-[5px]">키:{pokemon.height}, 몸무게:{pokemon.weight}</div>
+      </div>
       {/* 타입, 능력치 등 원하는 정보 추가 */}
     </div>
   );
