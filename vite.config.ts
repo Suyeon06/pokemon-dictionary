@@ -13,4 +13,19 @@ export default defineConfig({
     react(),
     tailwindcss(),
   ],
+  server: {
+    port: 5174,
+    watch: {
+      usePolling: true,
+      interval: 50,
+      followSymlinks: false,
+    },
+    hmr: {
+      overlay: true,
+      port: 3001,
+    },
+  },
+  optimizeDeps: {
+    force: true,
+  },
 });
