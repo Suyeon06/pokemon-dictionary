@@ -16,7 +16,7 @@ export const Route = createRootRoute({
         </Link>
       </div>
        
-      <hr />
+      <hr className="border-[#e8e8e8]"/>
       
 
       <div className="flex flex-wrap items-center mx-[200px] my-[40px]">

@@ -25,12 +25,12 @@ function getTypeColor(typeName: string) {
 // 로딩 컴포넌트
 function CardLoading() {
   return (
-    <div className="border border-[#e8e8e8] p-2 w-[150px] h-[200px] m-[8px] rounded-[10px] animate-pulse">
-      <div className="bg-gray-200 h-4 mb-2 rounded"></div>
-      <div className="bg-gray-200 h-32 rounded"></div>
+    <div className="border border-[#e8e8e8] p-2 w-[150px] h-[200px] m-[8px] rounded-[10px]">
+      <div className="skeleton h-4 mb-2"></div>
+      <div className="skeleton h-32"></div>
       <div className="flex space-x-2 mt-2">
-        <div className="bg-gray-200 h-5 w-12 rounded"></div>
-        <div className="bg-gray-200 h-5 w-12 rounded"></div>
+        <div className="skeleton h-5 w-12"></div>
+        <div className="skeleton h-5 w-12"></div>
       </div>
     </div>
   );
@@ -56,7 +56,7 @@ function PokeCardContent({ name }: { name: string }) {
   return (
     <div
       onClick={() => navigate({ to: `/pokemon/${name}` })}
-      className="hover:shadow-lg hover:translate-y-[-5px] border border-[#e8e8e8] p-2 w-[150px] h-[200px] m-[8px] rounded-[10px]"
+      className="hover:shadow-lg hover:translate-y-[-5px] duration-400 border border-[#e8e8e8] p-2 w-[150px] h-[200px] m-[8px] rounded-[10px]"
     >
       <div className="divide-y divide-[#e8e8e8]">
         <h3 className="text-center font-bold text-[#2a2a2a]">{name}</h3>
@@ -78,6 +78,7 @@ function PokeCardContent({ name }: { name: string }) {
     </div>
   );
 }
+//dutaion..애니메이션 지속시간 
 
 // Suspense로 감싼 메인 컴포넌트
 export default function PokeCard({ name }: { name: string }) {

@@ -1,7 +1,23 @@
 @import "tailwindcss";
 
+@keyframes loading {
+  0% {
+    background-position: 200%;
+  }
+  100% {
+    background-position: -200%;
+  }
+}
+
+.skeleton {
+  animation: loading 4s infinite linear;
+  border-radius: 0.125rem;
+  background-image: linear-gradient(to right, #d1d5db, #f3f4f6, #d1d5db);
+  background-size: 300% 100%;
+}
+
 body {
   background-color: #fdfdfd;
 }
 
-/*전체 바탕색
+/*전체 바탕색*/
