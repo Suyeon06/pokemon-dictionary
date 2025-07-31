@@ -1,7 +1,9 @@
+import { Suspense } from 'react';
 import { useNavigate } from "@tanstack/react-router";
 import { usePokemonDetails } from "../api/pokeapi";
 //useNavigate..페이지 이동 함수
 //usePokemonDetails..name을 파라미터로 받아서 포켓몬 데이터를 가져오는 함수
+//suspense.. 로딩중 상태를 표시하는 컴포넌트
 
 // 타입별 색상 함수
 function getTypeColor(typeName: string) {
@@ -20,12 +22,24 @@ function getTypeColor(typeName: string) {
 //getTypeColor..타입 색을 가져오는 함수. typeColors..타입 이름을 키로 사용해서 색상을 가져오는 변수(const붙어서 상수)
 
 
-export default function PokeCard({ name }: { name: string }) {
-  const navigate = useNavigate();
-  const { data: pokemon, isLoading, isError } = usePokemonDetails(name);
+// 로딩 컴포넌트
+function CardLoading() {
+  return (
+    <div className="border border-[#e8e8e8] p-2 w-[150px] h-[200px] m-[8px] rounded-[10px] animate-pulse">
+      <div className="bg-gray-200 h-4 mb-2 rounded"></div>
+      <div className="bg-gray-200 h-32 rounded"></div>
+      <div className="flex space-x-2 mt-2">
+        <div className="bg-gray-200 h-5 w-12 rounded"></div>
+        <div className="bg-gray-200 h-5 w-12 rounded"></div>
+      </div>
+    </div>
+  );
+}
 
-  if (isLoading) return <div>Loading...</div>;
-  if (isError) return <div>Error loading data</div>;
+// 메인 카드 컴포넌트 (Suspense 사용)
+function PokeCardContent({ name }: { name: string }) {
+  const navigate = useNavigate();
+  const { data: pokemon } = usePokemonDetails(name, { suspense: true }); // suspense 옵션 추가!
 
   // 포켓몬 데이터 확인 (개발자 확인용)
   console.log(`=== ${name} 포켓몬 데이터 ===`);
@@ -41,27 +55,36 @@ export default function PokeCard({ name }: { name: string }) {
 
   return (
     <div
-        onClick={() => navigate({ to: `/pokemon/${name}` })}
-        className="hover:shadow-lg hover:translate-y-[-5px]  border border-[#e8e8e8] p-2 w-[150px] h-[200px] m-[8px] rounded-[10px]"
-      >
-        <div className="divide-y divide-[#e8e8e8]">
-          <h3 className="text-center font-bold text-[#2a2a2a]">{name}</h3>
-          <div>
-            <img src={pokemon.sprites.front_default} alt={name} className="w-full h-full" />
-          </div>
-        </div>
-
-        <div className="flex space-x-2">
-          {pokemon.types.map((typeInfo: any) => (
-            <div 
-              key={typeInfo.type.name}
-              className={`text-center w-[60px] h-[20px] text-xs g-[4px] align-middle rounded-[4px] text-black font-normal ${getTypeColor(typeInfo.type.name)}`}
-            >
-              {typeInfo.type.name}
-            </div>
-          ))}
+      onClick={() => navigate({ to: `/pokemon/${name}` })}
+      className="hover:shadow-lg hover:translate-y-[-5px] border border-[#e8e8e8] p-2 w-[150px] h-[200px] m-[8px] rounded-[10px]"
+    >
+      <div className="divide-y divide-[#e8e8e8]">
+        <h3 className="text-center font-bold text-[#2a2a2a]">{name}</h3>
+        <div>
+          <img src={pokemon.sprites.front_default} alt={name} className="w-full h-full" />
         </div>
       </div>
+
+      <div className="flex space-x-2">
+        {pokemon.types.map((typeInfo: any) => (
+          <div 
+            key={typeInfo.type.name}
+            className={`text-center w-[60px] h-[20px] text-xs rounded-[4px] text-black font-normal ${getTypeColor(typeInfo.type.name)}`}
+          >
+            {typeInfo.type.name}
+          </div>
+        ))}
+      </div>
+    </div>
+  );
+}
+
+// Suspense로 감싼 메인 컴포넌트
+export default function PokeCard({ name }: { name: string }) {
+  return (
+    <Suspense fallback={<CardLoading />}>
+      <PokeCardContent name={name} />
+    </Suspense>
   );
 }
 //onClick={() => navigate({ to: "/pokemon/$name" })}.. 클릭하면 해당 경로 페이지로 이동
@@ -78,3 +101,5 @@ export default function PokeCard({ name }: { name: string }) {
   // 두 번째 반복 (index = 1)
   // typeInfo = {type: {name: "poison"}}
   // typeInfo.type.name = "poison"
+
+//<suspense fallback={<CardLoading />}>.. 로딩중 상태를 표시할 컴포넌트(PokeCardContent)

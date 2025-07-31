@@ -19,10 +19,12 @@ export function usePokeApi() {
 //funtion usePokeApi.. usePokeApi라는 함수를 만들고 export.. 다른 파일에서 이 함수를 사용할 수 있게 내보내기
 //useSWR(Api주소(url), 데이터 가져오는 방법(fetcher)).. fetcher을 이용해 데이터를 가져오고, 결과를 data, error, isLoading으로 나눠서 받기.
 //return{ isError: error}.. error를 받으면 isError로 저장. 
-export function usePokemonDetails(name: string) {
+
+export function usePokemonDetails(name: string, options?: { suspense?: boolean }) {
   const { data, error, isLoading } = useSWR(
     `https://pokeapi.co/api/v2/pokemon/${name}`,
-    fetcher
+    fetcher,
+    options
   );
   return {
     data: data,
