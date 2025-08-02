@@ -5,9 +5,9 @@ const fetcher = (url: string) => fetch(url).then((res) => res.json());
 //api호출 함수. fetch(url) 서버에 HTTP요청 보내기. .then(res)=>res.json() 응답을 받아서 JSON형태로 변환.
 //url: string(문자열). 만약 age:number(숫자) 이렇게 타입을 지정
 
-export function usePokeApi() {
+export function usePokeApi(page: number) {
   const { data, error, isLoading } = useSWR(
-    "https://pokeapi.co/api/v2/pokemon?limit=20",
+    `https://pokeapi.co/api/v2/pokemon?limit=20&offset=${((page-1) * 20)}`,
     fetcher
   );
   return {
