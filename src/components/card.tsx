@@ -14,7 +14,18 @@ function getTypeColor(typeName: string) {
     grass: "bg-[#87D780]",
     poison: "bg-[#BF80D7]",
     flying: "bg-[#A0CFF5]",
-    bug: "bg-[#B0D765]"
+    bug: "bg-[#B0D765]",
+    electric: "bg-[#F5D780]", 
+    fairy: "bg-[#E8B7D7]",      
+    ground: "bg-[#D7B980]",     
+    fighting: "bg-[#D79A80]",   
+    ice: "bg-[#A0E1E7]",        
+    psychic: "bg-[#D7A0C2]",    
+    rock: "bg-[#C4B48C]",       
+    dark: "bg-[#8E8E8E]",       
+    steel: "bg-[#A0A0B8]",      
+    ghost: "bg-[#A89BD7]",      
+    stellar: "bg-[#C5B1E7]"
   };
   
   return typeColors[typeName];
@@ -41,11 +52,18 @@ function PokeCardContent({ name }: { name: string }) {
   const navigate = useNavigate();
   const { data: pokemon } = usePokemonDetails(name, { suspense: true }); // suspense 옵션 추가!
 
+  // 포켓몬 ID 추출 (URL에서 마지막 숫자)
+  const pokemonId = pokemon.id;
+
+  // dream-world 이미지 경로 생성
+  const dreamWorldImage = `/sprites/sprites/pokemon/other/dream-world/${pokemonId}.svg`;
+
   // 포켓몬 데이터 확인 (개발자 확인용)
   console.log(`=== ${name} 포켓몬 데이터 ===`);
   console.log("전체 데이터:", pokemon);
   console.log("이름:", pokemon.name);
-  console.log("이미지:", pokemon.sprites.front_default);
+  console.log("ID:", pokemonId);
+  console.log("Dream World 이미지:", dreamWorldImage);
   console.log("타입:", pokemon.types);
   console.log("키:", pokemon.height);
   console.log("몸무게:", pokemon.weight);
@@ -56,16 +74,20 @@ function PokeCardContent({ name }: { name: string }) {
   return (
     <div
       onClick={() => navigate({ to: `/pokemon/${name}` })}
-      className="hover:shadow-lg hover:translate-y-[-5px] duration-400 border border-[#e8e8e8] p-2 w-[150px] h-[200px] m-[8px] rounded-[10px]"
+      className="hover:shadow-lg hover:translate-y-[-5px] duration-400 border border-[#e8e8e8] p-2 w-[150px] h-[200px] m-[8px] rounded-[10px] flex flex-col justify-between items-center"
     >
       <div className="divide-y divide-[#e8e8e8]">
         <h3 className="text-center font-bold text-[#2a2a2a]">{name}</h3>
-        <div>
-          <img src={pokemon.sprites.front_default} alt={name} className="w-full h-full" />
-        </div>
+        <div/>
       </div>
-
-      <div className="flex space-x-2">
+      <div>
+          <img 
+            src={dreamWorldImage} 
+            alt={name} 
+            className="h-[100px] object-contain"
+          />
+        </div>
+      <div className="flex self-start space-x-2 pl-[2px]">
         {pokemon.types.map((typeInfo: any) => (
           <div 
             key={typeInfo.type.name}
