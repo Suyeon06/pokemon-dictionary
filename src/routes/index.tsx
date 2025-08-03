@@ -24,7 +24,7 @@ function RouteComponent() {
 
   const pokemons: Pokemon[] = data.results;
   return (
-    <div className="flex flex-col gap-[43px]">
+    <div className="flex flex-col gap-[43px] items-center">
       <div className="flex justify-center items-center my-[20px]">
         <img src="/pokeLogo.svg" alt="Pokemon Logo" className="w-[300px] h-[110px]"/>
       </div>
@@ -52,15 +52,18 @@ function RouteComponent() {
         ))}
       </div>
       
-      <div className="flex items-center gap-[10px]">
+      <div className="flex items-center gap-5">
         <button 
         className="w-0 h-0 border-t-[10px] border-b-[10px] border-r-[10px] border-t-transparent border-b-transparent border-r-gray-700"
         onClick={()=>setPage(page -1)}
-        disabled={1>=page}></button>
-        {pages.map((pageNumber)=>(
-          <button
-            onClick={()=>setPage(pageNumber)}>{pageNumber}</button>
-        ))}
+        disabled={1>=page}> 
+        </button>
+
+          {pages.map((pageNumber)=>(
+            <button
+              onClick={()=>setPage(pageNumber)}>{pageNumber}</button>
+          ))}
+
         <button 
         className="w-0 h-0 border-t-[10px] border-b-[10px] border-l-[10px] border-t-transparent border-b-transparent border-l-gray-700"
         onClick={()=>setPage(page +1)}></button>

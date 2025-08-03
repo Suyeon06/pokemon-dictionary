@@ -8,24 +8,26 @@ import { usePokemonDetails } from "../api/pokeapi";
 // 타입별 색상 함수
 function getTypeColor(typeName: string) {
   const typeColors: { [key: string]: string } = {
-    normal: "bg-[#B0B0B0]",
-    fire: "bg-[#D78081]",
-    water: "bg-[#80B8D7]",
-    grass: "bg-[#87D780]",
-    poison: "bg-[#BF80D7]",
-    flying: "bg-[#A0CFF5]",
-    bug: "bg-[#B0D765]",
-    electric: "bg-[#F5D780]", 
-    fairy: "bg-[#E8B7D7]",      
-    ground: "bg-[#D7B980]",     
-    fighting: "bg-[#D79A80]",   
-    ice: "bg-[#A0E1E7]",        
-    psychic: "bg-[#D7A0C2]",    
-    rock: "bg-[#C4B48C]",       
-    dark: "bg-[#8E8E8E]",       
-    steel: "bg-[#A0A0B8]",      
-    ghost: "bg-[#A89BD7]",      
-    stellar: "bg-[#C5B1E7]"
+    normal: "bg-[#C0BC9C]",
+    fire: "bg-[#EC9C70]",
+    water: "bg-[#91ADEB]",
+    grass: "bg-[#95D181]",
+    poison: "bg-[#BE6EAA]",
+    flying: "bg-[#BBAFEF]",
+    bug: "bg-[#BACB60]",
+    electric: "bg-[#F5DD62]",
+    fairy: "bg-[#E8AEBB]",
+    ground: "bg-[#E2C78D]",
+    fighting: "bg-[#D06772]",
+    ice: "bg-[#B4E2E8]",
+    psychic: "bg-[#F983A8]",
+    rock: "bg-[#CAB96A]",
+    dark: "bg-[#92796D]",
+    steel: "bg-[#CACBDE]",
+    ghost: "bg-[#937FB2]",
+    stellar: "bg-[#D4C3ED]",
+    dragon: "bg-[#9988F6]",
+
   };
   
   return typeColors[typeName];
@@ -84,7 +86,7 @@ function PokeCardContent({ name }: { name: string }) {
           <img 
             src={dreamWorldImage} 
             alt={name} 
-            className="h-[100px] object-contain"
+            className="h-[90px] object-contain max-w-[100px]"
           />
         </div>
       <div className="flex self-start space-x-2 pl-[2px]">

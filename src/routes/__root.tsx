@@ -4,7 +4,7 @@ import { TanStackRouterDevtools } from "@tanstack/react-router-devtools";
 export const Route = createRootRoute({
   component: () => (
     <>
-      <div className="p-2 flex justify-between">
+      <div className="flex justify-between">
         <Link to="/" className="[&.active]:font-semibold text-[20px] text-[#2a2a2a]">
           Home
         </Link>{" "}
@@ -19,7 +19,7 @@ export const Route = createRootRoute({
       <hr className="border-[#e8e8e8]"/>
       
 
-      <div className="flex flex-wrap items-center mx-[200px] my-[40px]">
+      <div className="flex items-center">
         <Outlet />
       </div>
 
