@@ -24,14 +24,14 @@ function RouteComponent() {
 
   const pokemons: Pokemon[] = data.results;
   return (
-    <div className="flex flex-col gap-[43px] items-center">
-      <div className="flex justify-center items-center my-[20px]">
-        <img src="/pokeLogo.svg" alt="Pokemon Logo" className="w-[300px] h-[110px]"/>
+    <div className="flex flex-col gap-[8px] items-center justify-start w-[75%] h-screen">
+      {/* 로고 */}
+      <div className="flex justify-center items-center mb-[10px]">
+        <img src="/pokeLogo.svg" alt="Pokemon Logo" className="h-[90px]"/>
       </div>
 
-      <div
-        className="flex items-center w-full h-[36px]"
-      >
+      {/* search bar */}
+      <div className="flex items-center w-[70%] h-[30px]">
         <button
           className="flex w-auto h-full items-center justify-center rounded-l-[20px] border-l-[1px] border-b-[1px] border-t-[1px] border-l-0 border-[#E8E8E8] pr-[16px] pl-[16px] py-[10px] bg-[#F5F5F7]">
           <img
@@ -44,15 +44,17 @@ function RouteComponent() {
           placeholder="Search"
           className="flex w-full h-full rounded-r-[30px] border-[1px] border-[#E8E8E8] py-[10px] px-[20px] gap-[10px] text-[16px] leading-4 outline-none"
         />
-        
       </div>
-      <div className="flex flex-wrap">
+
+      {/* 포켓몬 카드 */}
+      <div className="grid grid-cols-[repeat(auto-fit,minmax(120px,1fr))] w-[75%]">
         {pokemons.map((pokemon: Pokemon) => (
           <PokeCard key={pokemon.name} name={pokemon.name} />
         ))}
       </div>
-      
-      <div className="flex items-center gap-5">
+
+      {/* pagination bar*/}
+      <div className="flex items-center gap-1">
         <button 
         className="w-0 h-0 border-t-[10px] border-b-[10px] border-r-[10px] border-t-transparent border-b-transparent border-r-gray-700"
         onClick={()=>setPage(page -1)}
@@ -61,7 +63,10 @@ function RouteComponent() {
 
           {pages.map((pageNumber)=>(
             <button
-              onClick={()=>setPage(pageNumber)}>{pageNumber}</button>
+              onClick={()=>setPage(pageNumber)}
+              className={`${pageNumber === page ? "bg-gray-400 text-white w-[30px] h-[30px] rounded-[5px]" : "bg-[#fdfdfd] text-[#2a2a2a] w-[30px] h-[30px] rounded-[5px] hover:bg-blue-500"}`}>
+              {pageNumber}
+            </button>
           ))}
 
         <button 

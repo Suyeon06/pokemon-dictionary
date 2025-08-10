@@ -7,7 +7,7 @@ const fetcher = (url: string) => fetch(url).then((res) => res.json());
 
 export function usePokeApi(page: number) {
   const { data, error, isLoading } = useSWR(
-    `https://pokeapi.co/api/v2/pokemon?limit=20&offset=${((page-1) * 20)}`,
+    `https://pokeapi.co/api/v2/pokemon?limit=18&offset=${((page-1) * 20)}`,
     fetcher
   );
   return {

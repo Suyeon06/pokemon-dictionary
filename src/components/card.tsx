@@ -74,30 +74,32 @@ function PokeCardContent({ name }: { name: string }) {
   console.log("================================");
 
   return (
-    <div
-      onClick={() => navigate({ to: `/pokemon/${name}` })}
-      className="hover:shadow-lg hover:translate-y-[-5px] duration-400 border border-[#e8e8e8] p-2 w-[150px] h-[200px] m-[8px] rounded-[10px] flex flex-col justify-between items-center"
-    >
-      <div className="divide-y divide-[#e8e8e8]">
-        <h3 className="text-center font-bold text-[#2a2a2a]">{name}</h3>
-        <div/>
-      </div>
-      <div>
-          <img 
-            src={dreamWorldImage} 
-            alt={name} 
-            className="h-[90px] object-contain max-w-[100px]"
-          />
+    <div className="flex justify-center">
+      <div
+        onClick={() => navigate({ to: `/pokemon/${name}` })}
+        className="hover:shadow-lg hover:translate-y-[-5px] duration-400 border border-[#e8e8e8] p-2 w-[120px] h-[160px] m-[8px] rounded-[10px] flex flex-col justify-between items-center"
+      >
+        <div className="divide-y divide-[#e8e8e8]">
+          <h1 className="text-center font-bold text-[#2a2a2a] text-[14px]">{name}</h1>
+          <div/>
         </div>
-      <div className="flex self-start space-x-2 pl-[2px]">
-        {pokemon.types.map((typeInfo: any) => (
-          <div 
-            key={typeInfo.type.name}
-            className={`text-center w-[60px] h-[20px] text-xs rounded-[4px] text-black font-normal ${getTypeColor(typeInfo.type.name)}`}
-          >
-            {typeInfo.type.name}
+        <div>
+            <img 
+              src={dreamWorldImage} 
+              alt={name} 
+              className="h-[70px] object-contain max-w-[80px]"
+            />
           </div>
-        ))}
+        <div className="flex self-start space-x-1">
+          {pokemon.types.map((typeInfo: any) => (
+            <div 
+              key={typeInfo.type.name}
+              className={`text-center w-[50px] h-[16px] text-xs rounded-[4px] text-black font-normal ${getTypeColor(typeInfo.type.name)}`}
+            >
+              {typeInfo.type.name}
+            </div>
+          ))}
+        </div>
       </div>
     </div>
   );
