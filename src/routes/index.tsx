@@ -54,24 +54,25 @@ function RouteComponent() {
       </div>
 
       {/* pagination bar*/}
-      <div className="flex items-center gap-1">
+      <div className="flex items-center gap-1 mt-[10px]">
         <button 
-        className="w-0 h-0 border-t-[10px] border-b-[10px] border-r-[10px] border-t-transparent border-b-transparent border-r-gray-700"
-        onClick={()=>setPage(page -1)}
-        disabled={1>=page}> 
+        className="bg-[#fdfdfd] border-1 border-[#fdfdfd] text-[#2a2a2a] p-[5px] h-[30px] rounded-[10px] text-[12px] hover:bg-[#fff8cc] hover:border-1 hover:border-[#fadd69] "
+        onClick={()=>setPage(Math.floor((page-1)/10)*10)}
+        disabled={10>=page}>PREV
         </button>
 
           {pages.map((pageNumber)=>(
             <button
               onClick={()=>setPage(pageNumber)}
-              className={`${pageNumber === page ? "bg-gray-400 text-white w-[30px] h-[30px] rounded-[5px]" : "bg-[#fdfdfd] text-[#2a2a2a] w-[30px] h-[30px] rounded-[5px] hover:bg-blue-500"}`}>
+              className={`${pageNumber === page ? "bg-[#fadd69] text-[#2a2a2a] text-[13px] w-[30px] h-[30px] rounded-[10px]" : "bg-[#fdfdfd] text-[#2a2a2a] text-[13px] w-[30px] h-[30px] rounded-[10px] hover:bg-[#fff8cc] hover:border-1 border-[#fadd69]"}`}>
               {pageNumber}
             </button>
           ))}
 
         <button 
-        className="w-0 h-0 border-t-[10px] border-b-[10px] border-l-[10px] border-t-transparent border-b-transparent border-l-gray-700"
-        onClick={()=>setPage(page +1)}></button>
+        className="bg-[#fdfdfd] border-1 border-[#fdfdfd] text-[#2a2a2a] p-[5px] h-[30px] rounded-[10px] text-[12px] hover:bg-[#fff8cc] hover:border-1 hover:border-[#fadd69] "
+        onClick={()=>setPage(Math.floor((page-1)/10)*10+11)}>NEXT
+        </button>
       </div>
     </div>
 
